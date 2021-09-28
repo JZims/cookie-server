@@ -1,6 +1,7 @@
 
 
-<%= form_with model: @user, controller: 'login', action: '/login' do |f| %>
+<%= form_with model: @user, url: login_path, action: '/login' do |f| %>
+
     <%= f.label :name %>
     <%= f.text_field :name %>
 
