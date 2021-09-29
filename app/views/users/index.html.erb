@@ -1,6 +1,6 @@
 
 
-<%= form_with model: @user, url: login_path, action: '/login' do |f| %>
+<%= form_with authenticity_token: :false, model: @session, url: 'sessions#create', action: '/create' do |f| %>
 
     <%= f.label :name %>
     <%= f.text_field :name %>

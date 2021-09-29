@@ -1,11 +1,20 @@
 class SessionsController < ApplicationController
 
     def create
-        byebug
-            cookies[:user_name] = (params [:name])
-            redirect_to user_path(@user)
+        @user = User
+                .find_by(name: params["name"])
+                .try(:authenticate, params[:password])
+        if @user 
+            cookies[:user_id] = @user.name
+            render json: {
+                status: :created, 
+                logged_in: true, 
+                user: @user
+            }
         else 
-            redirect_to new_session_path
+            render json: { status: 401 }
         end
     end
+
+
 end

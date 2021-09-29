@@ -1,7 +1,11 @@
 Rails.application.routes.draw do
-  resources :users, only: [:index]
 
- post "/users", to: "users#login"
+  resources :sessions, only: [:create]
+  resources :users, only: [:index]
+  root to: "users#index"
+
+
+#  post "/users", to: "users#login"
 
   
 end

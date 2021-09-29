@@ -17,16 +17,18 @@ class UsersController < ApplicationController
         @user = User.find_by(name: user_params[:name])
 
         if @user 
-            Session.create({user: @user[:name]})
+            Session.new({user: params[:name]})
+            redirect_to users_path
         else 
             flash[:error] = "Invalid User"
+            redirect_to users_path
         end
     end
 
     private
 
     def user_params
-        params.permit(:name, :password_digest)
+        params.permit(:name, :password)
     end
 
 end
